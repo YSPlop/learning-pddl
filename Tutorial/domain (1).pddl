@@ -1,5 +1,4 @@
 (define (domain gripper-strips)
-(:requirements :strips)
     (:types balls rooms hands)
     (:predicates 
 
@@ -7,13 +6,21 @@
         (at ?b - balls ?r - rooms)
         (free ?g - hands)
         (carry ?o - balls ?g - hands)
+        (connected ?from ?to - rooms)
     )
 
    (:action move
        :parameters  (?from ?to - rooms)
-       :precondition (and (at-robby ?from))
+       :precondition (
+                        and 
+                            (connected ?from ?to) ; This says that when you move from one room to another it is connected
+                            (at-robby ?from)
+                     )
        :effect (and  
+                    ; This is the add effect
                     (at-robby ?to)
+
+                    ; This is the delete effect
 		            (not (at-robby ?from))
                 )
     )
@@ -40,10 +47,7 @@
    (:action drop
        :parameters  (?obj - balls  ?room - rooms ?gripper - hands)
        :precondition  
-                    (and  
-                        (ball ?obj) 
-                        (room ?room) 
-                        (gripper ?gripper)
+                    (and
 			            (carry ?obj ?gripper) 
                         (at-robby ?room)
                     )
