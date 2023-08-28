@@ -1,22 +1,47 @@
 (define (problem strips-gripper-x-3)
        (:domain gripper-strips)
        (:objects 
-              rooma roomb 
-              ball8 ball7 ball6 ball5 ball4 ball3 ball2 ball1 
-              left right
+              loc1_1 loc1_2 loc1_3 loc1_4 loc2_1 loc2_2 loc2_3 loc2_4 loc3_1 loc3_2 loc3_3 loc3_4 loc4_1 loc4_2 loc4_3 loc4_4 - rooms
+              ball8 ball7 ball6 ball5 ball4 ball3 ball2 ball1 - balls
+              left right - hands
        )
        (:init 
-          (at-robby rooma)
-          (free left)
-          (free right)
-          (at ball8 rooma)
-          (at ball7 rooma)
-          (at ball6 rooma)
-          (at ball5 rooma)
-          (at ball4 rooma)
-          (at ball3 rooma)
-          (at ball2 rooma)
-          (at ball1 rooma)
+              (connected loc1_1 loc2_1)
+              (connected loc1_1 loc1_2)
+              (connected loc1_2 loc2_2)
+              (connected loc1_2 loc1_3)
+              (connected loc1_3 loc2_3)
+              (connected loc1_3 loc1_4)
+              (connected loc1_4 loc2_4)
+              (connected loc2_1 loc3_1)
+              (connected loc2_1 loc2_2)
+              (connected loc2_2 loc3_2)
+              (connected loc2_2 loc2_3)
+              (connected loc2_3 loc3_3)
+              (connected loc2_3 loc2_4)
+              (connected loc2_4 loc3_4)
+              (connected loc3_1 loc4_1)
+              (connected loc3_1 loc3_2)
+              (connected loc3_2 loc4_2)
+              (connected loc3_2 loc3_3)
+              (connected loc3_3 loc4_3)
+              (connected loc3_3 loc3_4)
+              (connected loc3_4 loc4_4)
+              (connected loc4_1 loc4_2)
+              (connected loc4_2 loc4_3)
+              (connected loc4_3 loc4_4)
+
+              (at-robby rooma)
+              (free left)
+              (free right)
+              (at ball8 rooma)
+              (at ball7 rooma)
+              (at ball6 rooma)
+              (at ball5 rooma)
+              (at ball4 rooma)
+              (at ball3 rooma)
+              (at ball2 rooma)
+              (at ball1 rooma)
        )
        (:goal 
               (and 

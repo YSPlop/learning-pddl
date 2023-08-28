@@ -1,16 +1,17 @@
 (define (domain gripper-strips)
 (:requirements :strips)
-   (:predicates 
+    (:types balls rooms hands)
+    (:predicates 
 
-		(at-robby ?r)
-		(at ?b ?r)
-		(free ?g)
-		(carry ?o ?g)
+        (at-robby ?r - rooms)
+        (at ?b - balls ?r - rooms)
+        (free ?g - hands)
+        (carry ?o - balls ?g - hands)
     )
 
    (:action move
-       :parameters  (?from ?to)
-       :precondition (and  (room ?from) (room ?to) (at-robby ?from))
+       :parameters  (?from ?to - rooms)
+       :precondition (and (at-robby ?from))
        :effect (and  
                     (at-robby ?to)
 		            (not (at-robby ?from))
@@ -20,7 +21,7 @@
 
 
    (:action pick
-       :parameters (?obj ?room ?gripper)
+       :parameters (?obj - balls ?room - rooms ?gripper - hands)
        :precondition  
                     (and  
 			            (at ?obj ?room) 
@@ -37,7 +38,7 @@
 
 
    (:action drop
-       :parameters  (?obj  ?room ?gripper)
+       :parameters  (?obj - balls  ?room - rooms ?gripper - hands)
        :precondition  
                     (and  
                         (ball ?obj) 
